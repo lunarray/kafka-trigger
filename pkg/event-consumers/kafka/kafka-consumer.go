@@ -85,7 +85,7 @@ func init() {
 // createConsumerProcess gets messages to a Kafka topic from the broker and send the payload to function service
 func createConsumerProcess(broker, topic, funcName, ns, consumerGroupID string, clientset kubernetes.Interface, stopchan, stoppedchan chan struct{}) {
 	// Init consumer
-	brokersSlice := []string{broker}
+	brokersSlice := strings.Split(brokers, ",")
 	topicsSlice := []string{topic}
 
 	consumer, err := cluster.NewConsumer(brokersSlice, consumerGroupID, topicsSlice, config)
